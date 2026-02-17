@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WEB EN CONSTRUCCIÓN</title>
+
+<style>
+body {
+  background: black;
+  color: lime;
+  text-align: center;
+  font-family: "Courier New", monospace;
+}
+
+.box {
+  border: 5px ridge lime;
+  padding: 20px;
+  margin: 40px;
+  background: #001100;
+}
+
+button {
+  background: gray;
+  border: 3px solid white;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 6px;
+}
+
+blink {
+  animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to { visibility: hidden; }
+}
+</style>
+
+<script>
+function sonido() {
+  alert("🔊 *sonido retro imaginario*");
+}
+
+/* CONTADOR DE VISITAS */
+let visitas = 10;
+function contar() {
+  visitas++;
+  document.getElementById("contador").innerText = visitas;
+}
+
+/* DESCARGA LICENSE */
+function downloadLicense(){
+const text = `WEB CORE — License
+
+Copyright (c) 2026 Red Core Studios
+
+All rights reserved.
+
+This project and its source code may not be copied, modified,
+distributed, published, sublicensed, or sold without permission.
+
+Educational viewing allowed only.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+`;
+
+const blob = new Blob([text], {type:"text/plain"});
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "LICENSE.txt";
+a.click();
+}
+</script>
+
+</head>
+
+<body onload="contar()">
+
+<div class="box">
+
+<h1>🚧 WEB EN CONSTRUCCIÓN 🚧</h1>
+
+<marquee>🔥 BIENVENIDO AL SITIO MÁS RETRO DE INTERNET 🔥</marquee>
+
+<br>
+
+<blink>ACTUALIZANDO CONTENIDO...</blink>
+
+<br><br>
+
+<img src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
+
+<br><br>
+
+<button onclick="sonido()">ENTRAR</button>
+<button onclick="downloadLicense()">DESCARGAR LICENSE</button>
+
+<br><br>
+
+👁 VISITAS: <span id="contador">0</span>
+
+<br><br>
+
+⚠ Mejor visto en 800x600 ⚠
+
+</div>
+
+</body>
+</html>
