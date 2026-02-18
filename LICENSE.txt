@@ -1,0 +1,12 @@
+WEB CORE — License
+
+Copyright (c) 2026 Red Core Studios
+
+All rights reserved.
+
+This project and its source code may not be copied, modified,
+distributed, published, sublicensed, or sold without permission.
+
+Educational viewing allowed only.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

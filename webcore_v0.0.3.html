@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WEB CORE</title>
+
+<style>
+body {
+  background: black;
+  color: lime;
+  font-family: Courier New, monospace;
+  text-align: center;
+}
+
+.window {
+  border: 4px ridge lime;
+  background: #001100;
+  margin: 20px;
+  padding: 15px;
+}
+
+button {
+  background: silver;
+  border: 3px outset white;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input {
+  background: black;
+  color: lime;
+  border: 2px solid lime;
+}
+
+blink {
+  animation: blink 1s steps(2,start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+</style>
+
+<script>
+let visitas = 100;
+
+function contar() {
+  visitas++;
+  document.getElementById("visitas").innerText = visitas;
+}
+
+function popup() {
+  alert("⚠ Ventana emergente retro ⚠");
+}
+
+function enviarChat() {
+  let msg = document.getElementById("chatInput").value;
+  let box = document.getElementById("chatBox");
+  box.innerHTML += "<br>> " + msg;
+  document.getElementById("chatInput").value = "";
+}
+
+function juego() {
+  let n = Math.floor(Math.random()*5)+1;
+  let guess = prompt("Adivina número 1-5");
+  if (guess == n) alert("GANASTE 👾");
+  else alert("Perdiste — era " + n);
+}
+</script>
+
+</head>
+
+<body onload="contar()">
+
+<h1>💾 PORTAL RETRO 💾</h1>
+
+<marquee>🔥 WEB EN CONSTRUCCIÓN — ÚLTIMA ACTUALIZACIÓN: 1999 🔥</marquee>
+
+<div class="window">
+<h2><blink>🚧 SITIO EN CONSTRUCCIÓN 🚧</blink></h2>
+<img src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
+<br><br>
+Mejor visto en 800x600
+</div>
+
+<div class="window">
+<h3>📟 MENÚ PRINCIPAL</h3>
+<button onclick="popup()">Noticias</button>
+<button onclick="popup()">Descargas</button>
+<button onclick="popup()">Links</button>
+</div>
+
+<div class="window">
+<h3>💬 CHAT RETRO</h3>
+<div id="chatBox">Conectado...</div>
+<br>
+<input id="chatInput">
+<button onclick="enviarChat()">Enviar</button>
+</div>
+
+<div class="window">
+<h3>🎮 MINIJUEGO</h3>
+<button onclick="juego()">Jugar</button>
+</div>
+
+<div class="window">
+👁 VISITAS: <span id="visitas">0</span>
+</div>
+
+</body>
+</html>
