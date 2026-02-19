@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WEB CORE</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #bfe9ff, #e6f7ff);
+  overflow: hidden;
+}
+
+/* fondo burbujas */
+.bubble {
+  position: fixed;
+  bottom: -50px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 30% 30%, white, #7fd3ff);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: subir 10s linear infinite;
+}
+
+@keyframes subir {
+  to {
+    transform: translateY(-120vh);
+  }
+}
+
+/* panel vidrio */
+.panel {
+  margin: 80px auto;
+  width: 420px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(0,150,255,0.5);
+}
+
+h1 {
+  color: #0a58ff;
+  text-shadow: 0 0 10px white;
+}
+
+.sub {
+  font-size: 20px;
+  color: #00aaff;
+}
+
+button {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to bottom, #aee7ff, #5cc8ff);
+  box-shadow: 0 0 10px #7fd3ff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* efecto hacking falso */
+.code {
+  position: fixed;
+  top: 0;
+  color: #00ff88;
+  font-family: monospace;
+  font-size: 18px;
+  animation: caer 2s linear forwards;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+</style>
+
+<script>
+function burbujas() {
+  for (let i=0;i<8;i++){
+    let b=document.createElement("div");
+    b.className="bubble";
+    b.style.left=Math.random()*100+"vw";
+    b.style.animationDuration=(6+Math.random()*6)+"s";
+    document.body.appendChild(b);
+  }
+}
+
+function hackFalso(letra) {
+  let c = document.createElement("div");
+  c.className = "code";
+  c.innerText = letra + Math.floor(Math.random()*10);
+  c.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),2000);
+}
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key.length===1){
+    hackFalso(e.key.toUpperCase());
+  }
+});
+
+function activar() {
+  alert("Modo WEB CORE activado ✨");
+}
+</script>
+
+</head>
+
+<body onload="burbujas()">
+
+<div class="panel">
+  <h1>🌐 WEB CORE</h1>
+  <div class="sub">✨ Estilo renovado ✨</div>
+  <br>
+  <button onclick="activar()">Entrar</button>
+  <p>Pulsa letras para activar modo hack visual</p>
+</div>
+
+</body>
+</html>
