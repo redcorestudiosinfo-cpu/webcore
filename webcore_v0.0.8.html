@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WEB CORE — Estilo Renovado</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #c9f2ff, #eafcff);
+  overflow: hidden;
+}
+
+/* brillo superior */
+.glowbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+  pointer-events: none;
+}
+
+/* burbujas */
+.bubble {
+  position: fixed;
+  bottom: -60px;
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #8fdcff);
+  border-radius: 50%;
+  opacity: 0.6;
+  cursor: pointer;
+  animation: subir linear forwards;
+  box-shadow: 0 0 20px #9fe4ff;
+}
+
+@keyframes subir {
+  to { transform: translateY(-120vh); }
+}
+
+.pop { animation: pop 0.25s forwards; }
+@keyframes pop {
+  to { transform: scale(1.7); opacity: 0; }
+}
+
+/* ventana vidrio */
+.window {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 40px rgba(120,200,255,0.6);
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.titlebar {
+  background: linear-gradient(to right, #7fdcff, #bfefff);
+  padding: 12px;
+  border-radius: 22px 22px 0 0;
+  font-weight: bold;
+  color: #0a6fbf;
+  text-shadow: 0 0 6px white;
+  cursor: move;
+}
+
+/* contenido */
+.content {
+  padding: 28px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  color: #1c7ed6;
+  text-shadow: 0 0 14px white;
+}
+
+.sub {
+  font-size: 22px;
+  color: #2aa9ff;
+  font-weight: bold;
+}
+
+/* botones vidrio */
+button {
+  padding: 12px 22px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(to bottom, #d7f6ff, #8fe3ff);
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,0.9),
+    0 0 12px #8fe3ff;
+  cursor: pointer;
+  font-size: 16px;
+  color: #045c88;
+  font-weight: bold;
+  margin: 6px;
+}
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+/* hack visual */
+.code {
+  position: fixed;
+  top: 0;
+  color: #1c7ed6;
+  font-family: monospace;
+  font-size: 18px;
+  text-shadow: 0 0 8px #9fe4ff;
+  animation: caer 2s linear forwards;
+}
+
+@keyframes caer {
+  to { transform: translateY(100vh); opacity: 0; }
+}
+</style>
+
+<script>
+/* burbujas */
+function crearBurbuja() {
+  let b = document.createElement("div");
+  b.className = "bubble";
+  b.style.left = Math.random()*100 + "vw";
+  b.style.animationDuration = (7 + Math.random()*5) + "s";
+
+  b.onclick = () => {
+    b.classList.add("pop");
+    sonidoPop();
+    setTimeout(()=>b.remove(),250);
+  };
+
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),13000);
+}
+setInterval(crearBurbuja, 900);
+
+/* sonido pop */
+function sonidoPop(){
+  try{
+    let ctx = new (window.AudioContext||window.webkitAudioContext)();
+    let o = ctx.createOscillator();
+    let g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.value = 600;
+    g.gain.value = 0.05;
+    o.start();
+    o.stop(ctx.currentTime+0.08);
+  }catch(e){}
+}
+
+/* hack visual falso */
+function hackFalso(letra) {
+  let c = document.createElement("div");
+  c.className = "code";
+  c.innerText = letra + Math.floor(Math.random()*10);
+  c.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),2000);
+}
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key.length===1){
+    hackFalso(e.key.toUpperCase());
+  }
+});
+
+/* ventana arrastrable */
+function drag(el){
+  let offX, offY, drag=false;
+  el.onmousedown = e=>{
+    drag=true;
+    offX=e.offsetX; offY=e.offsetY;
+  };
+  document.onmousemove = e=>{
+    if(drag){
+      el.parentElement.style.left = (e.pageX-offX)+"px";
+      el.parentElement.style.top = (e.pageY-offY)+"px";
+      el.parentElement.style.transform="none";
+    }
+  };
+  document.onmouseup=()=>drag=false;
+}
+
+function abrirExtra(){
+  alert("WEB CORE activo — estilo renovado ✨");
+}
+
+window.onload=()=>{
+  drag(document.getElementById("title"));
+};
+</script>
+
+</head>
+
+<body>
+
+<div class="glowbar"></div>
+
+<div class="window">
+  <div class="titlebar" id="title">🌐 WEB CORE</div>
+  <div class="content">
+    <h1>WEB CORE</h1>
+    <div class="sub">🚧 WEB EN CONSTRUCCIÓN 🚧</div>
+    <br>
+    <button onclick="abrirExtra()">Entrar</button>
+    <button onclick="alert('Sistema aero funcionando')">Sistema</button>
+    <p>Revienta burbujas con clic</p>
+    <p>Presiona letras → modo hack visual</p>
+  </div>
+</div>
+
+</body>
+</html>
